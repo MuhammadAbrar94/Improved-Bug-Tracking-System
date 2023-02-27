@@ -1,0 +1,19 @@
+<div class="container text-center">
+  <% if current_user %>
+    <% if current_user.role == "manager" %>
+      <h1>Manager Dashboard</h1>
+      <%= render template: "projects/index" %>
+    <% elsif current_user.role == "developer" %>
+      <h1>Developer Dashboard</h1>
+      <%= render template: "projects/index" %>
+    <% elsif current_user.role == "qa" %>
+      <h1>QA Dashboard</h1>
+      <%= render template: "projects/index" %>
+    <% end %>
+  <% else %>
+    <h1>Welcome to the Buge</h1>
+    <p class="lead">Please sign up or sign in to continue</p>    
+    <%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+    <%= link_to "Sign in", new_user_session_path, class: "btn btn-lg btn-default" %>
+  <% end %>
+</div>

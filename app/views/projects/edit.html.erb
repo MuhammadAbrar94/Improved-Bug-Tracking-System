@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-5">Edit the Project</h1>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <%= form_for(@project, html: { class: "form-horizontal", role: "form" }) do |f| %>
+        <div class="form-group">
+          <label class="control-label">Title</label>
+          <%= f.text_field :title, class: "form-control", placeholder: "Name of project", autofocus: true %>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter steps to create project" %>
+        </div>
+
+          <div class="form-group">
+            <%= label_tag "user_ids[]", "Select users" %><br>
+            <select name="user_ids[]" multiple style="min-width: 200px;">
+            <% @users.each do |user| %>
+              <option value="<%= user.id %>">
+              <% if user.role == "developer" %>
+                Developer - <%= user.email %>
+              <% else %>
+                QA - <%= user.email %>
+              <% end %>
+              </option>
+            <% end %>
+            </select> 
+          </div>
+
+
+        <div class="form-group text-center">
+          <%= f.submit "Save Changes", class: "btn btn-primary btn-lg btn-xlarge" %>
+          <%= link_to "Cancel and return to project listing", projects_path, class: "btn btn-secondary ml-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
