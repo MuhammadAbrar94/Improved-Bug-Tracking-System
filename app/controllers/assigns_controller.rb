@@ -1,4 +1,5 @@
 class AssignsController < ApplicationController
+  load_and_authorize_resource
   def destroy
     Assign.find(params[:id]).destroy
     flash[:success] = "Assigne deleted successfully"

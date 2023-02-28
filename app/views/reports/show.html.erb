@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <div class="card">
+    <%= link_to "Return to see all the assigned projects", projects_path, class: "btn btn-primary" %> 
+    <div class="card-header">
+      <h5 class="card-title">Title: <%= @report.title %></h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Description: <%= @report.description %></p>
+      <p class="card-text">report Type: <%= @report.type_Report %></p>
+      <p class="card-text">Deadline: <%= @report.deadline %></p>
+      <p class="card-text">Status: <%= @report.status %></p>
+      <p>Project ID: <%= @report.project.id %></p>
+      <% if @report.image.present? %>
+        <img src="<%= @report.image %>" class="img-fluid rounded mb-3">
+      <% end %>
+    </div>
+  </div>
+</div>

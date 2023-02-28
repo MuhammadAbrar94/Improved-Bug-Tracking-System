@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   
   root 'pages#home'
   resources :projects
-  resources :buges
+  resources :reports
   resources :assigns
   # Defines the root path route ("/")
   # root "articles#index"

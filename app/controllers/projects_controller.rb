@@ -1,9 +1,11 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
 
   def index
     if current_user
       @user = current_user
-      @projects = @user.managed_projects
+      @manage = current_user.managed_projects.paginate(page: params[:page], per_page: 2)
+      # @projects = @user.managed_projects.paginate(page: params[:page], per_page: 3)
     end
   end
 
@@ -35,20 +37,19 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    assign_users = @project.assigns.pluck(:user_id)
-    @users = User.where(role: [:developer, :qa]).where.not(id: assign_users)
+    @users = User.where(role: [:developer, :qa])
+    @selected_user_ids = @project.users.pluck(:id)
   end
 
   def update
     @project = Project.find(params[:id])
     if @project.update(project_params)
-      @assigns = []
+      @project.users = []
       # loop through the selected user_ids to create new Assign records
       if !params[:user_ids].nil?
         params[:user_ids].each do |user_id|
           user = User.find(user_id)
-          assign = Assign.new(user: user, project: @project)
-          @assigns << assign if assign.save
+          @project.users << user
         end
       end
       flash[:success] = "Your project was updated successfully"

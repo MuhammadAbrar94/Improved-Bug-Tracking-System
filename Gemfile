@@ -7,7 +7,10 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem 'cancancan'
 gem 'bootstrap', '~> 5.2.0'
-
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'rubocop', require: false
+gem 'rubocop-rails', '~> 2.18'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

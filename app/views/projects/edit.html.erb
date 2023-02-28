@@ -14,20 +14,20 @@
           <%= f.text_area :description, rows: 10, class: "form-control", placeholder: "Enter steps to create project" %>
         </div>
 
-          <div class="form-group">
-            <%= label_tag "user_ids[]", "Select users" %><br>
-            <select name="user_ids[]" multiple style="min-width: 200px;">
+        <div class="form-group">
+          <%= label_tag "user_ids[]", "Select users" %><br>
+          <select name="user_ids[]" multiple style="min-width: 200px;">
             <% @users.each do |user| %>
-              <option value="<%= user.id %>">
+            <option value="<%= user.id %>" <%= @selected_user_ids.include?(user.id) ? "selected" : "" %>>
               <% if user.role == "developer" %>
                 Developer - <%= user.email %>
               <% else %>
                 QA - <%= user.email %>
               <% end %>
-              </option>
+            </option>
             <% end %>
-            </select> 
-          </div>
+          </select> 
+        </div>
 
 
         <div class="form-group text-center">
