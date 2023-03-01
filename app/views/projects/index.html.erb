@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <%  @manage.each do |project| %>
+        <%  @manages.each do |project| %>
           
           <tr class="align-middle">
             <td> <%= i %>  </td>
@@ -34,8 +34,8 @@
       </tbody>
       
       </table>
-    <div class="apple_pagination">
-      <%= will_paginate @manage, :container => true %>
+    <div class="apple_pagination d-flex justify-content-center  ">
+      <%= will_paginate @manages, :container => true %>
     </div>
     <% else %>
         <p>You have not created any projects yet.</p>

@@ -5,8 +5,8 @@
       <% if current_user.role == "qa" %>
         <%= link_to "Add New report to this project", new_report_path(project_id: @project.id), class: "btn btn-primary mb-3" %>
 
-        <% if !@report.empty? %>
-          <% @report.each do |report| %>
+        <% if !@reports.empty? %>
+          <% @reports.each do |report| %>
             <div class="card mb-3">
               <div class="card-body">
                 <h5 class="card-title">Title: <%= report.title %></h5>
@@ -30,8 +30,8 @@
         <%end%>
       <% elsif current_user.role == "developer" %>
         
-        <% if !@report.empty? %>
-        <% @report.each do |report| %>
+        <% if !@reports.empty? %>
+        <% @reports.each do |report| %>
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title"><%= report.title %></h5>
@@ -49,8 +49,8 @@
         <%end%>
         <% elsif current_user.role == "manager" %>
         
-        <% if !@report.empty? %>
-        <% @report.each do |report| %>
+        <% if !@reports.empty? %>
+        <% @reports.each do |report| %>
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title"><%= report.title %></h5>

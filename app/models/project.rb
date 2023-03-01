@@ -7,9 +7,12 @@ class Project < ApplicationRecord
   validates :description, presence: true, length: { minimun: 1, maximum: 500 }
   has_many :reports, dependent: :destroy
 
-  belongs_to :user # for manager
+  belongs_to :user
   validates :user_id, presence: true
 
   has_many :assigns, dependent: :destroy
-  has_many :users, through: :assigns  # for developer and qa
+  has_many :users, through: :assigns
+
+  # scope :developer, ->  { self.users.where(users: { role: :developer }) }
+
 end

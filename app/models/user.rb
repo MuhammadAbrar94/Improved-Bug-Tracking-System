@@ -7,8 +7,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: %i[manager developer qa]
-  # has_many :project  # for manager
-  # has_many :project, through: :assigns # for developer and qa
   has_many :managed_projects, class_name: 'Project', foreign_key: 'user_id'
 
   has_many :assigns
