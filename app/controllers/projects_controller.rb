@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @users = User.all
+    @users = User.where(role: %i[developer qa])
     @project = Project.new(project_params)
     @project.user = current_user
     return render 'new', status: 300 unless @project.save

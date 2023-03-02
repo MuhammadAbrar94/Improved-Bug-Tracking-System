@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
       # @report = Report.where(project_id: params[:project_id])
     end
   end
-
+  
   def new
     @report = Report.new
     @project = Project.find(params[:project_id])

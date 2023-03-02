@@ -11,6 +11,8 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'rubocop', require: false
 gem 'rubocop-rails', '~> 2.18'
+gem 'jquery-rails'
+
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

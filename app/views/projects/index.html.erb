@@ -15,6 +15,7 @@
           <th>No.</th>
           <% i = 1 %>         
           <th>Title</th>
+          <th>Total Bugs </th>
           <th>Reports</th>
           <th>Options</th>
         </tr>
@@ -25,7 +26,15 @@
           <tr class="align-middle">
             <td> <%= i %>  </td>
               <% i = i + 1 %> 
-            <td style = "width: 80%"><%= link_to project.title, project_path(project) %></td>
+            <td style="width: 80%" class="hoverable">
+              <%= link_to project.title, project_path(project) %>
+              <div class="hidden-items">
+                <% project.reports.each do |r| %>
+                  <li><%= link_to r.title, report_path(id: r.id) %></li>
+                <%end%>
+              </div>
+            </td>
+            <td> <%= project.reports.count %> </td>
             <td><%= link_to "Show", reports_path(project_id: project.id),  class: "btn btn-secondary btn-sm" %></td>
             <td style = "display: flex; justify-content: space-between"><%= link_to "Edit", edit_project_path(project), class: "btn btn-secondary btn-sm" %>
             <span  style = "margin-left: 20px"><%= button_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure you want to delete this project?" }, class: "btn btn-danger btn-sm" %> </span>
