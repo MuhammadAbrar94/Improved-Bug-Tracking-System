@@ -2,6 +2,8 @@
 
 # This is ProjectController
 class ProjectsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   load_and_authorize_resource
 
   def index
@@ -12,20 +14,47 @@ class ProjectsController < ApplicationController
     # @projects = @user.managed_projects.paginate(page: params[:page], per_page: 3)
   end
 
+  # def new
+  #   @project = Project.new
+  #   @users = User.where(role: %i[developer qa])
+  # end
+
+  # def create
+  #   @users = User.where(role: %i[developer qa])
+  #   @project = Project.new(project_params)
+  #   @project.user = current_user
+  #   return render 'new', status: 300 unless @project.save
+
+  #   create_assigns
+  #   redirect_to project_path(@project)
+  # end
+
   def new
     @project = Project.new
     @users = User.where(role: %i[developer qa])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
-
+  
   def create
     @users = User.where(role: %i[developer qa])
     @project = Project.new(project_params)
     @project.user = current_user
-    return render 'new', status: 300 unless @project.save
-
-    create_assigns
-    redirect_to project_path(@project)
+  
+    respond_to do |format|
+      if @project.save
+        create_assigns
+        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.json { render json: { message: 'Project was successfully created.' }, status: :created }
+      else
+        format.html { render :new }
+        format.json { render json: { message: 'Error creating project.' }, status: :unprocessable_entity }
+      end
+    end
   end
+  
 
   def edit
     @project = Project.find(params[:id])
